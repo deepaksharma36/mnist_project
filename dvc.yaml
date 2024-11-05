@@ -1,0 +1,25 @@
+stages:
+  download_data:
+    cmd: python src/download_data.py
+    outs:
+      - data/mnist/MNIST/raw
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+      - src/preprocess.py
+    outs:
+      - data/mnist/processed/train
+      - data/mnist/processed/test
+  train:
+    cmd: python src/train.py
+    deps:
+      - src/train.py
+      - data/mnist/processed/train
+    outs:
+      - src/models/model.pth
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+      - src/evaluate.py
+      - src/models/model.pth
+      - data/mnist/processed/test

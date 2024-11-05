@@ -1,0 +1,32 @@
+# FastAPI for the web framework
+fastapi==0.95.0
+
+# Uvicorn for the ASGI server
+uvicorn==0.22.0
+
+# PyTorch for building and loading the ML model
+torch==2.0.1
+
+# Torchvision for image transformations and datasets
+torchvision==0.15.2
+
+# NumPy for numerical operations
+numpy<2
+
+# Pillow for image processing
+Pillow
+
+# DVC for data versioning and pipeline management
+dvc
+
+# DVC S3 support
+dvc[s3]
+
+# pydantic for data validation
+pyyaml
+
+python-multipart
+
+boto3
+
+botocore

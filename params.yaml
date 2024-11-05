@@ -1,0 +1,11 @@
+# params.yaml
+preprocess:
+  resize: 28
+
+train:
+  epochs: 5
+  batch_size: 64
+  learning_rate: 0.001
+
+evaluate:
+  threshold: 0.5
