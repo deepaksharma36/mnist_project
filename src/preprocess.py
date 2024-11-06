@@ -1,23 +1,28 @@
 import os
 import gzip
+import logging
 import numpy as np
 from PIL import Image
-import shutil
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 def extract_mnist_images(file_path, size):
     with gzip.open(file_path, 'rb') as f:
         f.read(16)  # Skip the header
         buf = f.read(28 * 28 * size)  # Read the images
         data = np.frombuffer(buf, dtype=np.uint8).astype(np.float32)
+        logging.info(f"Extracted {size} images from {file_path}")
         return data.reshape(size, 28, 28)
 
 def extract_mnist_labels(file_path, size):
+    logging.info(f"Extracting labels from {file_path}")
     with gzip.open(file_path, 'rb') as f:
         f.read(8)  # Skip the header
         buf = f.read(size)  # Read the labels
         return np.frombuffer(buf, dtype=np.uint8)
 
 def save_images(data, labels, output_dir):
+    logging.info(f"Saving images to {output_dir}")
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
@@ -31,6 +36,8 @@ def save_images(data, labels, output_dir):
         image_path = os.path.join(label_dir, f'image_{i}.png')
         image = Image.fromarray((data[i] * 255).astype(np.uint8))
         image.save(image_path)
+    logging.info(f"Saved {len(data)} images to {output_dir}")
+
 
 if __name__ == "__main__":
     raw_data_dir = 'data/mnist/MNIST/raw'
