@@ -6,7 +6,7 @@ This project trains a neural network to classify MNIST digits and deploys it wit
 
 1. Clone the repository:
    ```
-   git clone <repository-url>
+   git clone https://github.com/deepaksharma36/mnist_project.git
    cd mnist_project
    ```
 
@@ -20,7 +20,7 @@ This project trains a neural network to classify MNIST digits and deploys it wit
     ```
 4. Run inference on the service through FAST-API(on localhost)
     ```
-    # if trained model is available then dvc pipeline will be invoked during the setup 
+    # if trained model is unavailable then dvc pipeline will be invoked during the setup 
     curl -X POST "http://127.0.0.1:8000/predict" -F "image=@sample.png"
     ```
 
