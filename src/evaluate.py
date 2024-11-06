@@ -3,7 +3,7 @@ import os
 import torch
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
-from models.model import SimpleNN
+from models.model_cnn import CustomNetwork
 import yaml
 import logging
 
@@ -46,7 +46,7 @@ def evaluate_model(model, test_loader):
 def main():
     # Load the model
     logger.info("Loading model...")
-    model = SimpleNN()
+    model = CustomNetwork()
     model.load_state_dict(torch.load('src/models/model.pth'))  # Load the trained weights
     model.to(device)
 

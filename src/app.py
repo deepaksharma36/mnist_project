@@ -4,7 +4,7 @@ import torch
 from fastapi import FastAPI, File, UploadFile, HTTPException, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
-from models.model import SimpleNN 
+from models.model_cnn import CustomNetwork 
 from PIL import Image
 import numpy as np
 #import boto3
@@ -48,7 +48,7 @@ def run_dvc_pipeline():
 
 def load_model():
     """Load the model from the specified path."""
-    model = SimpleNN()
+    model = CustomNetwork()
     model.load_state_dict(torch.load(MODEL_PATH))
     model.eval()  # Set the model to evaluation mode
     return model
