@@ -58,7 +58,11 @@ def preprocess_image(image: UploadFile) -> torch.Tensor:
     image_data = Image.open(image.file)  # Convert to grayscale
     image_data = image_data.resize((28, 28))  # Resize to 28x28 pixels
     image_array = np.array(image_data) / 255.0  # Normalize to [0, 1]
-    image_tensor = torch.tensor(image_array, dtype=torch.float32).view(-1, 28 * 28)  # Flatten
+    image_tensor = torch.tensor(image_array, dtype=torch.float32)  # Convert to tensor
+    
+    # Add an extra dimension to match expected input shape: [batch_size, channels, height, width]
+    image_tensor = image_tensor.permute(2, 0, 1).unsqueeze(0)  # Shape: [1, 3, 28, 28]
+    #image_tensor = torch.tensor(image_array, dtype=torch.float32).view(-1, 28 * 28)  # Flatten
     return image_tensor
 
 # Check if the model exists; if not, run the DVC pipeline
