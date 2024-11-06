@@ -7,13 +7,13 @@ from pydantic import BaseModel
 from models.model import SimpleNN 
 from PIL import Image
 import numpy as np
-import boto3
-from botocore.exceptions import NoCredentialsError, PartialCredentialsError
+#import boto3
+#from botocore.exceptions import NoCredentialsError, PartialCredentialsError
 import time
 
-cloudwatch = boto3.client("cloudwatch", region_name="us-east-1") 
+#cloudwatch = boto3.client("cloudwatch", region_name="us-east-1") 
 
-def log_metric(metric_name, value, unit="Count"):
+"""def log_metric(metric_name, value, unit="Count"):
     try:
         cloudwatch.put_metric_data(
             Namespace="FastAPIApp",
@@ -28,7 +28,7 @@ def log_metric(metric_name, value, unit="Count"):
     except (NoCredentialsError, PartialCredentialsError) as e:
         print("CloudWatch logging error:", e)
 
-
+"""
 app = FastAPI()
 
 # Path to the model file
@@ -69,7 +69,7 @@ if not os.path.exists(MODEL_PATH):
 # Load the model
 model = load_model()
 
-@app.middleware("http")
+"""@app.middleware("http")
 async def add_metrics_middleware(request: Request, call_next):
     start_time = time.time()
     response = await call_next(request)
@@ -83,7 +83,7 @@ async def add_metrics_middleware(request: Request, call_next):
 
     return response
 
-
+"""
 @app.post('/predict')
 async def predict(image: UploadFile = File(...)):
     """Make predictions on the uploaded image file."""

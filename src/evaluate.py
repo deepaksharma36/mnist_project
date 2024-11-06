@@ -15,7 +15,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Define transformations for the test dataset
 transform = transforms.Compose([
-    transforms.Resize((28, 28)),  # Resize to 28x28 if necessary
+    transforms.Resize((28, 28)),  # Resize to 28x28
     transforms.ToTensor(),
 ])
 
